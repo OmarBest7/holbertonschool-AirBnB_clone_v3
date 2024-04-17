@@ -15,6 +15,14 @@ def teardown_appcontext(self):
     """Close storage"""
     storage.close()
 
+@app.errorhandler(404)
+def handle_404(e):
+    """Error handler for 404 (Not Found) errors"""
+    response = jsonify({"error": "Not found"})
+    response.status_code = 404
+    return make_response(response)
+
+
 if __name__ == "__main__":
     """Main function"""
     from os import getenv
