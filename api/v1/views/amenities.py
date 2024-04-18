@@ -18,7 +18,36 @@ def get_amenities():
 @app_views.route('/amenities/<amenity_id>', methods=['GET'],
                  strict_slashes=False)
 def get_amenity(amenity_id):
-    """Retrieves a Amenity object"""
+    """Retrieves a Amenity object
+    This is using docstrings for specifications.
+    ---
+    parameters:
+      - name: amenity_id
+        in: path
+        type: string
+        required: true
+    definitions:
+      Amenity_id:
+        type: object
+        properties:
+          __class__:
+            type: string
+          created_at:
+            type: string
+          id:
+            type: string
+          name:
+            type: string
+          updated_at:  
+            type: string
+    responses:
+      200:
+        description: Amenity object related to the id provided.
+        schema:
+          $ref: '#/definitions/Amenity_id'
+        examples:
+          rgb: ['red', 'green', 'blue']
+    """
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)

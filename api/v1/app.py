@@ -4,8 +4,10 @@ from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 from flask_cors import CORS
+from flasgger import Swagger
 
 app = Flask(__name__)
+swagger = Swagger(app)
 CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 app.register_blueprint(app_views)
 app.url_map.strict_slashes = False
